@@ -1,0 +1,11 @@
+{
+	"name": "Basic AdSense",
+	"description": "Provides a basic widget for displaying Google Adsense ads",
+	"version": "1.0",
+	"date": "2011-03-27",
+	"author": "vSongBook",
+	"author_uri": "http://www.song2review.org",
+	"license": "GPLv2",
+	"min_aps": "1.4",
+	"load_order": "after_db_init"
+}

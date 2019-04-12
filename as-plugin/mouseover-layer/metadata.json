@@ -1,0 +1,11 @@
+{
+	"name": "Mouseover Layer",
+	"description": "Shows song content on mouse over in song lists",
+	"version": "1.0.1",
+	"date": "2011-12-06",
+	"author": "vSongBook",
+	"author_uri": "http://www.song2review.org",
+	"license": "GPLv2",
+	"min_aps": "1.5",
+	"load_order": "after_db_init"
+}

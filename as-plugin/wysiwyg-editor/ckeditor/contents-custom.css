@@ -1,0 +1,8 @@
+/**
+ * APS custom CSS for CKEditor
+ * Increases default font size. You can add custom styles here to match your theme, but make sure that you do not overwrite it when upgrading APS!
+ */
+
+body, .cke_editable {
+	font-size: 16px;
+}
