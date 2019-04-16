@@ -1459,14 +1459,16 @@ function as_db_user_account_selectspec($useridhandle, $isuserid)
 {
 	return array(
 		'columns' => array(
-			'^users.userid', 'passsalt', 'passcheck' => 'HEX(passcheck)', 'passhash', 'firstname', 'lastname', 'country', 'mobile', 'gender', 'city', 'church', 'email', 'level', 'emailcode', 'handle',
+			'^users.userid', 'passsalt', 'passcheck' => 'HEX(passcheck)', 'passhash', 'firstname', 'lastname', '^users.country', 'mobile', 'gender', 'cityname' => '^cities.title', 'churchname' => '^churches.title', 'email', 'level', 'emailcode', 'handle',
 			'created' => 'UNIX_TIMESTAMP(created)', 'sessioncode', 'sessionsource', 'flags', 'signedin' => 'UNIX_TIMESTAMP(signedin)',
 			'signinip', 'written' => 'UNIX_TIMESTAMP(written)', 'writeip',
 			'avatarblobid' => 'BINARY avatarblobid', // cast to BINARY due to MySQL bug which renders it signed in a union
 			'avatarwidth', 'avatarheight', 'points', 'wallposts',
 		),
 
-		'source' => '^users LEFT JOIN ^userpoints ON ^userpoints.userid=^users.userid WHERE ^users.' . ($isuserid ? 'userid' : 'handle') . '=$',
+		'source' => '^users LEFT JOIN ^userpoints ON ^userpoints.userid=^users.userid' . 
+			' LEFT JOIN ^cities ON ^cities.cityid=^users.city LEFT JOIN ^churches ON ^churches.churchid=^users.church' .
+			' WHERE ^users.' . ($isuserid ? 'userid' : 'handle') . '=$',
 		'arguments' => array($useridhandle),
 		'single' => true,
 	);

@@ -125,12 +125,53 @@ function as_db_user_find_by_mobile($mobile)
 	));
 }
 
+/**
+ * Return the ids of all cities in the database which match $title (should be one or none)
+ * @param $email
+ * @return array
+ */
+function as_db_city_find_by_title($title, $country)
+{
+	$matchrows = as_db_read_all_values(as_db_query_sub( 'SELECT cityid FROM ^cities WHERE title=$', $title ));
+	if (count($matchrows) == 1) $inrowid = $matchrows[0];
+	else {
+		as_db_query_sub('INSERT INTO ^cities (title, country) VALUES ($, $)', $title, $country);
+		$inrowid = as_db_last_insert_id();
+	}
+	return $inrowid;
+}
+
+/**
+ * Return the ids of all churches in the database which match $title (should be one or none)
+ * @param $email
+ * @return array
+ */
+function as_db_church_find_by_title($title, $city)
+{
+	$matchrows = as_db_read_all_values(as_db_query_sub( 'SELECT churchid FROM ^churches WHERE title=$', $title ));
+	if (count($matchrows) == 1) $inrowid = $matchrows[0];
+	else {
+		as_db_query_sub('INSERT INTO ^churches (title, city) VALUES ($, #)', $title, $city);
+		$inrowid = as_db_last_insert_id();
+	}
+	return $inrowid;
+}
+
 
 /**
  * Return the ids of all users in the database which match $handle (=username), should be one or none
  * @param $handle
  * @return array
  */
+function as_db_name_find_by_handle($handle)
+{
+	$username = as_db_read_all_values(as_db_query_sub(
+		'SELECT CONCAT(firstname, " ", lastname) AS fullname FROM ^users WHERE handle=$',
+		$handle
+	));
+	return $username[0];
+}
+
 function as_db_user_find_by_handle($handle)
 {
 	return as_db_read_all_values(as_db_query_sub(

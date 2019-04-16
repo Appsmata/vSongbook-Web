@@ -26,8 +26,37 @@
 		$data['message'] = as_lang_html('users/no_permission');
 	}
 
-	else if (strlen($infirstname) && strlen($inlastname) && strlen($incountry) && strlen($inmobile) && strlen($ingender) 
-		&& strlen($incity) && strlen($inchurch)) {
+	else if (empty($infirstname)) {
+		$data['success'] = 3;
+		$data['message'] = 'Your first name appears inavalid';
+	}
+	
+	else if (empty($inlastname)) {
+		$data['success'] = 3;
+		$data['message'] = 'Your last name appears inavalid';
+	}
+	
+	else if (empty($incountry)) {
+		$data['success'] = 3;
+		$data['message'] = 'Your last name appears inavalid';
+	}
+	
+	else if (empty($inmobile)) {
+		$data['success'] = 3;
+		$data['message'] = 'Your mobile number appears inavalid';
+	}
+	
+	else if (empty($incity)) {
+		$data['success'] = 3;
+		$data['message'] = 'Your city name appears inavalid';
+	}
+	
+	else if (empty($inchurch)) {
+		$data['success'] = 3;
+		$data['message'] = 'Your church name appears inavalid';
+	}
+	
+	else {
 		require_once AS_INCLUDE_DIR . 'app/limits.php';
 
 		if (as_user_limits_remaining(AS_LIMIT_REGISTRATIONS)) {
@@ -37,7 +66,6 @@
 			// core validation
 			$errors = array_merge(
 				as_mobile_handle_filter($inmobile, $inhandle),
-				//as_password_validate($inpassword)
 			);
 
 			$inprofile = array();
@@ -49,9 +77,11 @@
 			}
 
 			if (empty($errors)) {
-				// signup and redirect
 				as_limits_increment(null, AS_LIMIT_REGISTRATIONS);
-				$userid = as_create_new_user($infirstname, $inlastname, $incountry, $inmobile, $ingender, $incity, $inchurch, $inhandle, $inemail, null);
+				$incityid = as_db_city_find_by_title($incity, $incountry);
+				$inchurchid = as_db_church_find_by_title($inchurch, $incityid);
+								
+				$userid = as_create_new_user($infirstname, $inlastname, $incountry, $inmobile, $ingender, $incityid, $inchurchid, $inhandle, $inemail, null);
 				$userinfo = as_db_select_with_pending(as_db_user_account_selectspec($userid, true));
 				
 				as_set_logged_in_user($userid, $userinfo['handle']);
@@ -64,8 +94,8 @@
 				$data['country'] = $userinfo['country'];
 				$data['mobile'] = $userinfo['mobile'];
 				$data['gender'] = $userinfo['gender'];
-				$data['city'] = $userinfo['city'];
-				$data['church'] = $userinfo['church'];
+				$data['city'] = $userinfo['cityname'];
+				$data['church'] = $userinfo['churchname'];
 				$data['email'] = $userinfo['email'];
 				$data['level'] = $userinfo['level'];
 				$data['handle'] = $userinfo['handle'];
@@ -80,11 +110,7 @@
 			$data['success'] = 2;
 			$data['message'] = as_lang('users/signup_limit');
 		}
-
-	} else {
-		$data['success'] = 3;
-		$data['message'] = 'You need to fill all fields correctly to proceed';
-	}
+	} 
 	
 	$output = json_encode(array('data' => $data));	
 	echo $output;

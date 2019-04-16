@@ -48,7 +48,9 @@
 			array_push($data, array(
 				'postid' 			=> $songid,
 				'basetype' 			=> $song['basetype'],
+				'number' 			=> $song['number'],
 				'title' 			=> $song['title'],
+				'content' 			=> $song['content'],
 				'tags' 				=> array_key_exists('tags', $song) ? $song['tags'] : null,
 				'created' 			=> $song['created'],
 				'categoryid' 		=> $song['categoryid'],

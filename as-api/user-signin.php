@@ -8,8 +8,6 @@
 	
 	$inmobile = as_post_text('mobile');
 	
-	$success = 0;
-	$message = '';
 	$data = array();
 	if (strlen($inmobile)) {
 		require_once AS_INCLUDE_DIR . 'app/limits.php';
@@ -34,8 +32,8 @@
 				$data['country'] = $userinfo['country'];
 				$data['mobile'] = $userinfo['mobile'];
 				$data['gender'] = $userinfo['gender'];
-				$data['city'] = $userinfo['city'];
-				$data['church'] = $userinfo['church'];
+				$data['city'] = $userinfo['cityname'];
+				$data['church'] = $userinfo['churchname'];
 				$data['email'] = $userinfo['email'];
 				$data['level'] = $userinfo['level'];
 				$data['handle'] = $userinfo['handle'];
@@ -56,7 +54,7 @@
 
 	} else {
 		$data['success'] = 4;
-		$data['message'] = 'You need to enter your valid mobile number';
+		$data['message'] = 'You need to enter a valid mobile number';
 	}
 	
 	$output = json_encode(array('data' => $data));	

@@ -754,7 +754,7 @@ function as_who_to_html($isbyuser, $postuserid, $usershtml, $ip = null, $microda
 		$whohtml = $usershtml[$postuserid];
 	} else {
 		if (strlen($name))
-			$whohtml = as_html($name);
+			$whohtml = as_html(as_db_name_find_by_handle($name));
 		elseif ($isbyuser)
 			$whohtml = as_lang_html('main/me');
 		else

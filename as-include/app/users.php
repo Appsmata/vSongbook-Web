@@ -563,12 +563,13 @@ if (AS_FINAL_EXTERNAL_USERS) {
 		if (strlen($handle) === 0) {
 			return as_lang('main/anonymous');
 		}
+		require_once AS_INCLUDE_DIR . 'db/users.php';
 
 		$url = as_path_html('user/' . $handle);
 		$favclass = $favorited ? ' as-user-favorited' : '';
 		$mfAttr = $microdata ? ' itemprop="url"' : '';
 
-		$userHandle = $microdata ? '<span itemprop="name">' . as_html($handle) . '</span>' : as_html($handle);
+		$userHandle = $microdata ? '<span itemprop="name">' . as_html(as_db_name_find_by_handle($handle)) . '</span>' : as_html(as_db_name_find_by_handle($handle));
 		$userHtml = '<a href="' . $url . '" class="as-user-link' . $favclass . '"' . $mfAttr . '>' . $userHandle . '</a>';
 
 		if ($microdata) {
