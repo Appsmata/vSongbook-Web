@@ -113,6 +113,20 @@ function as_db_user_find_by_email($email)
 }
 
 /**
+ * Return the ids of all users in the database which match $handle (=username), should be one or none
+ * @param $handle
+ * @return array
+ */
+function as_db_name_find_by_handle($handle)
+{
+	$username = as_db_read_all_values(as_db_query_sub(
+		'SELECT CONCAT(firstname, " ", lastname) AS fullname FROM ^users WHERE handle=$',
+		$handle
+	));
+	return $username[0];
+}
+
+/**
  * Return the ids of all users in the database which match $mobile (should be one or none)
  * @param $email
  * @return array
@@ -155,21 +169,6 @@ function as_db_church_find_by_title($title, $city)
 		$inrowid = as_db_last_insert_id();
 	}
 	return $inrowid;
-}
-
-
-/**
- * Return the ids of all users in the database which match $handle (=username), should be one or none
- * @param $handle
- * @return array
- */
-function as_db_name_find_by_handle($handle)
-{
-	$username = as_db_read_all_values(as_db_query_sub(
-		'SELECT CONCAT(firstname, " ", lastname) AS fullname FROM ^users WHERE handle=$',
-		$handle
-	));
-	return $username[0];
 }
 
 function as_db_user_find_by_handle($handle)

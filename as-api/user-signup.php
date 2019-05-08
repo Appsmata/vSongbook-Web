@@ -28,32 +28,32 @@
 
 	else if (empty($infirstname)) {
 		$data['success'] = 3;
-		$data['message'] = 'Your first name appears inavalid';
+		$data['message'] = 'Your first name appears to be invalid';
 	}
 	
 	else if (empty($inlastname)) {
 		$data['success'] = 3;
-		$data['message'] = 'Your last name appears inavalid';
+		$data['message'] = 'Your last name appears to be invalid';
 	}
 	
 	else if (empty($incountry)) {
 		$data['success'] = 3;
-		$data['message'] = 'Your last name appears inavalid';
+		$data['message'] = 'Your last name appears to be invalid';
 	}
 	
 	else if (empty($inmobile)) {
 		$data['success'] = 3;
-		$data['message'] = 'Your mobile number appears inavalid';
+		$data['message'] = 'Your mobile number appears to be invalid';
 	}
 	
 	else if (empty($incity)) {
 		$data['success'] = 3;
-		$data['message'] = 'Your city name appears inavalid';
+		$data['message'] = 'Your city name appears to be invalid';
 	}
 	
 	else if (empty($inchurch)) {
 		$data['success'] = 3;
-		$data['message'] = 'Your church name appears inavalid';
+		$data['message'] = 'Your church name appears to be invalid';
 	}
 	
 	else {
