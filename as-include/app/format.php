@@ -1463,7 +1463,7 @@ function as_user_sub_navigation($handle, $selected, $ismyuser = false)
 {
 	$navigation = array(
 		'profile' => array(
-			'label' => as_lang_html_sub('profile/user_x', as_html($handle)),
+			'label' => as_db_name_find_by_handle($handle),
 			'url' => as_path_html('user/' . $handle),
 		),
 

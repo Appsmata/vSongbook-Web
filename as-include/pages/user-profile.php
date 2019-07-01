@@ -335,7 +335,7 @@ if ($signinlevel >= AS_USER_LEVEL_ADMIN && as_clicked('dosetbonus')) {
 
 $as_content = as_content_prepare();
 
-$as_content['title'] = as_lang_html_sub('profile/user_x', $userhtml);
+$as_content['title'] = as_db_name_find_by_handle($handle);
 $as_content['error'] = @$errors['page'];
 
 if (isset($signinuserid) && $signinuserid != $useraccount['userid'] && !AS_FINAL_EXTERNAL_USERS) {
