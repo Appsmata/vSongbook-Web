@@ -1,7 +1,7 @@
 <?php
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	Description: Controller for most admin pages which just contain options
 
@@ -16,7 +16,7 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 if (!defined('AS_VERSION')) { // don't allow this page to be requested directly from browser
@@ -1017,7 +1017,7 @@ foreach ($showoptions as $optionname) {
 						'<small>' .
 						as_html(urldecode(as_path('123/why-do-birds-sing', null, '/', $rawoption))) .
 						(($rawoption == AS_URL_FORMAT_NEAT) ? strtr(as_lang_html('admin/neat_urls_note'), array(
-							'^1' => '<a href="http://github.com/appsmata/htaccess.php" target="_blank">',
+							'^1' => '<a href="http://github.com/vsongbookhtaccess.php" target="_blank">',
 							'^2' => '</a>',
 						)) : '') .
 						'</small>';

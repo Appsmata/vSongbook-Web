@@ -1,7 +1,7 @@
 <?php
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	File: as-include/APS/Util/Metadata.php
 	Description: Some useful metadata handling stuff
@@ -17,7 +17,7 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 class APS_Util_Metadata

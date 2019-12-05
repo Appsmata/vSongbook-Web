@@ -2,7 +2,7 @@
 
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	File: as-include/APS/Plugin/PluginManager.php
 	Description: Keeps track of the installed plugins
@@ -18,7 +18,7 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 class APS_Plugin_PluginManager

@@ -1,7 +1,7 @@
 <?php
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	Description: Sits in an iframe and shows a green page with word 'OK'
 
@@ -16,7 +16,7 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 if (as_gpc_to_string(@$_GET['param']) == AS_URL_TEST_STRING) {

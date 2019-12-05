@@ -1,7 +1,7 @@
 <?php
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	Description: Basic viewer module for displaying HTML or plain text
 
@@ -16,7 +16,7 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 class as_viewer_basic

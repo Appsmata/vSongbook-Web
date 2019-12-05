@@ -1,7 +1,7 @@
 <?php
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	Description: Default theme class, broken into lots of little functions for easy overriding
 
@@ -16,7 +16,7 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 if (!defined('AS_VERSION')) { // don't allow this page to be requested directly from browser
@@ -96,8 +96,19 @@ class as_html_theme_base
 	{
 		foreach ($elements as $element) {
 			$line = str_replace('/>', '>', $element);
+			$delta = substr_count($element, '<') - substr_count($element, '<!') - 2 * substr_count($element, '</') - substr_count($element, '/>');
 
-			if ($this->minifyHtml) {
+			if ($delta < 0) {
+				$this->indent += $delta;
+			}
+
+			echo str_repeat("\t", max(0, $this->indent)) . $line . "\n";
+
+			if ($delta > 0) {
+				$this->indent += $delta;
+			}
+			
+			/*if ($this->minifyHtml) {
 				if (strlen($line))
 					echo $line . "\n";
 			} else {
@@ -112,7 +123,7 @@ class as_html_theme_base
 				if ($delta > 0) {
 					$this->indent += $delta;
 				}
-			}
+			}*/
 
 			$this->lines++;
 		}
@@ -258,19 +269,17 @@ class as_html_theme_base
 
 	public function html()
 	{
-		$attribution = '<!-- Powered by vSongBook - http://github.com/appsmata/ -->';
+		$attribution = '<!-- Powered by vSongBook - http://github.com/vsongbook -->';
 		$extratags = isset($this->content['html_tags']) ? $this->content['html_tags'] : '';
 
 		$this->output(
-			'<html ' . $extratags . '>',
-			$attribution
+			'<html ' . $extratags . '>'
 		);
 
 		$this->head();
 		$this->body();
 
 		$this->output(
-			$attribution,
 			'</html>'
 		);
 	}
@@ -279,7 +288,8 @@ class as_html_theme_base
 	{
 		$this->output(
 			'<head>',
-			'<meta charset="' . $this->content['charset'] . '"/>'
+			'<meta charset="' . $this->content['charset'] . '"/>',
+			'<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">'
 		);
 
 		$this->head_title();
@@ -387,93 +397,11 @@ class as_html_theme_base
 
 		$this->body_script();
 		$this->body_header();
-		//$this->body_content();
-		(as_is_logged_in()) ? $this->body_content() : $this->guest_content();
+		$this->body_content();
 		$this->body_footer();
 		$this->body_hidden();
 
 		$this->output('</body>');
-	}
-
-	public function guest_content()
-	{
-		$this->body_prefix();
-		$this->notices();
-		$this->output('<style>body{background: #eee;}</style>');
-		$this->output('<div class="as-body-wrapper">', '');
-		$this->output('<div class="as-guest-content">', '');
-		
-		$this->guest_header();
-		if($this->request == 'forgot') $this->guest_main();
-		else $this->guest_signin();
-		$this->guest_footer();
-
-		$this->output('</div> <!-- END guest-content -->');
-		$this->output('</div> <!-- END body-wrapper -->');
-
-		$this->body_suffix();
-	}
-
-	public function guest_header()
-	{
-		$this->output('<div class="as-guest-header">', '');
-
-		$logourl = as_opt('logo_url');
-		$this->output('<center><a href="' . as_path_html('') . '" class="as-logo-link-guest">');
-		if (as_opt('logo_show')) $this->output('<img src="' . 
-			as_html(is_numeric(strpos($logourl, '://')) ? $logourl : as_path_to_root() . $logourl) . '"/>');
-		else $this->output(as_html(as_opt('site_title')));
-		$this->output('</a></center></div>');
-	}
-
-	public function guest_signout()
-	{
-		$this->output('<div class="as-main">');
-		$this->page_title_error();
-		$this->main_part('form');
-		$this->output('</div> <!-- END as-main -->', '');
-	}
-
-	public function guest_main()
-	{
-		$content = $this->content;
-		$this->output('<div class="as-main-signout">');
-		$this->page_title_error();
-		$this->main_parts($content);
-		$this->output('</div> <!-- END as-main -->', '');
-	}
-
-	public function guest_signin()
-	{
-		$signin = $this->content['navigation']['user']['signin'];
-		$this->output(
-			'<form class="as-form-signout" action="' . $signin['url'] . '" method="post">',
-				'<center><input type="text" name="emailhandle" dir="auto" placeholder="' . trim(as_lang_html(as_opt('allow_signin_email_only') ? 'users/email_label' : 'users/email_handle_label'), ':') . '"/></center>',
-				'<center><input type="password" name="password" dir="auto" placeholder="' . trim(as_lang_html('users/password_label'), ':') . '"/></center>',
-				'<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="reuser" id="qam-reuserme" value="1"/>',
-				'<label for="qam-reuserme">' . as_lang_html('users/remember_label') . '</label></div>',
-				'<input type="hidden" name="code" value="' . as_html(as_get_form_security_code('signin')) . '"/>',
-				'<center><input type="submit" value="' . $signin['label'] . '" class="as-form-tall-button as-form-tall-button-signin" name="dosignin"/></center>',
-			'<br><br><hr></form>'
-		);
-		//$this->output('<a class="as-form-button-link" href="signout">Signout Now</a>&nbsp;&nbsp;');
-		$this->output('<center><br>');
-		$this->output('<a class="as-form-button-link" href="forgot">Forgot Passsword?</a>');		
-		$this->output('<br><br></center>');
-	}
-
-	public function guest_footer()
-	{
-		$this->output('<div class="as-guest-footer">');
-
-		$this->output(
-			'<center>',
-			'Powered by <a href="http://jacksiro.github.io">AppSmata</a> | Copyright &copy; ' . date('Y'),
-			'</center>'
-		);
-		$this->output('<div class="as-footer-clear">', '</div>');
-
-		$this->output('</div> <!-- END as-footer -->', '');
 	}
 
 	public function body_hidden()
@@ -994,7 +922,7 @@ class as_html_theme_base
 
 		$this->output(
 			'<div class="as-attribution">',
-			'Powered by <a href="http://github.com/appsmata/">vSongBook</a>',
+			'Powered by <a href="http://github.com/vsongbook">vSongBook</a>',
 			'</div>'
 		);
 	}

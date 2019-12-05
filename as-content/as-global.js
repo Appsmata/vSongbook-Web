@@ -1,6 +1,6 @@
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	Description: Common Javascript for APS pages including posting and AJAX
 
@@ -14,10 +14,50 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 // General page functions
+
+function as_search_song()
+{
+	var params = {};
+	params.bookid = document.getElementById('CmbBooks').value;
+	params.searchtext = document.getElementById('TxtSearch').value;
+
+	if(params.searchtext.length > 3)
+	{ 
+		as_ajax_post('searchsong', params, function(lines) {
+			if (lines[0] == '1') {
+				var resultsview = document.getElementById('songlist');
+				resultsview.innerHTML = lines.slice(1).join('\n');
+				//as_show_waiting_after(elem, false);
+			} else if (lines[0] == '0') {
+				as_show_waiting_after(elem, false);
+			} else {
+				as_ajax_error();
+			}
+		});
+	}
+	//as_show_waiting_after(document.getElementById('manager_results'), true);
+}
+
+function as_select_book()
+{
+	var params = {};
+	params.bookid = document.getElementById('CmbBooks').value;
+	as_ajax_post('selectbook', params, function(lines) {
+		if (lines[0] == '1') {
+			var resultsview = document.getElementById('songlist');
+			resultsview.innerHTML = lines.slice(1).join('\n');
+			//as_show_waiting_after(elem, false);
+		} else if (lines[0] == '0') {
+			as_show_waiting_after(elem, false);
+		} else {
+			as_ajax_error();
+		}
+	});
+}
 
 function as_reveal(elem, type, callback)
 {

@@ -1,7 +1,7 @@
 <?php
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	Description: Getting and setting admin options (application level)
 
@@ -16,7 +16,7 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 if (!defined('AS_VERSION')) { // don't allow this page to be requested directly from browser
@@ -373,7 +373,7 @@ function as_default_option($name)
 		'show_view_counts' => 0,
 		'show_when_created' => 1,
 		'site_text_direction' => 'ltr',
-		'site_theme' => 'Candy',
+		'site_theme' => 'Material',
 		'site_title' => 'vSongBook Online',
 		'smtp_port' => 25,
 		'sort_reviews_by' => 'created',

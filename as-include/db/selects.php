@@ -1,7 +1,7 @@
 <?php
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	Description: Builders of selectspec arrays (see as-db.php) used to specify database SELECTs
 
@@ -16,7 +16,7 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 if (!defined('AS_VERSION')) { // don't allow this page to be requested directly from browser
@@ -338,14 +338,43 @@ function as_db_categoryslugs_sql_args($categoryslugs, &$arguments)
  * @param $count
  * @return array
  */
-function as_db_posts_select($thumbuserid, $bookids)
+function as_db_posts_select($userid, $bookids)
 {
 	//$sortsql = 'ORDER BY ^posts.' . $sort . ' DESC, ^posts.created DESC';
 
-	$selectspec = as_db_posts_basic_selectspec($thumbuserid, true);
+	$selectspec = as_db_posts_basic_selectspec($userid, true);
 
 	$selectspec['source'] .=
 		" JOIN (SELECT postid FROM ^posts WHERE categoryid IN (" . $bookids . ") AND type='S') y ON ^posts.postid=y.postid";
+
+	return $selectspec;
+}
+
+
+/**
+ * Return the selectspec to retrieve songs (of type $specialtype if provided, or 'S' by default) sorted by $sort,
+ * restricted to $createip (if not null) and the category for $categoryslugs (if not null), with the corresponding thumb
+ * made by $thumbuserid (if not null) and including $full content or not. Return $count (if null, a default is used)
+ * songs starting from offset $start.
+ * @param $thumbuserid
+ * @param $sort
+ * @param $start
+ * @param $categoryslugs
+ * @param $createip
+ * @param bool $specialtype
+ * @param bool $full
+ * @param $count
+ * @return array
+ */
+function as_db_posts_search($userid, $search, $categoryslugs = null)
+{
+	$selectspec = as_db_posts_basic_selectspec($userid, true);
+	$selectspec['source'] .= ' LEFT JOIN ^categories AS childcat ON ^posts.categoryid=childcat.categoryid';
+	$selectspec['source'] .= ' LEFT JOIN ^categories AS parent ON childcat.parentid=parent.categoryid';
+	
+	$selectspec['source'] .= ' WHERE ^posts.title LIKE "%' . $search . '%"';
+	$selectspec['source'] .= ' OR parent.title LIKE "%' . $search . '%"';
+	$selectspec['source'] .= ' OR ^posts.content LIKE "%' . $search . '%"';
 
 	return $selectspec;
 }

@@ -1,7 +1,7 @@
 <?php
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	Description: Controller for user profile page, including wall
 
@@ -16,7 +16,7 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 if (!defined('AS_VERSION')) { // don't allow this page to be requested directly from browser
@@ -335,7 +335,7 @@ if ($signinlevel >= AS_USER_LEVEL_ADMIN && as_clicked('dosetbonus')) {
 
 $as_content = as_content_prepare();
 
-$as_content['title'] = as_db_name_find_by_handle($handle);
+$as_content['title'] = as_lang_html_sub('profile/user_x', $userhtml);
 $as_content['error'] = @$errors['page'];
 
 if (isset($signinuserid) && $signinuserid != $useraccount['userid'] && !AS_FINAL_EXTERNAL_USERS) {

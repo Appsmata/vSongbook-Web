@@ -1,7 +1,7 @@
 <?php
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	Description: Front line of response to Ajax requests, routing as appropriate
 
@@ -16,7 +16,7 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 // Output this header as early as possible
@@ -58,6 +58,8 @@ function as_ajax_db_fail_handler()
 $routing = array(
 	'notice' => 'notice.php',
 	'favorite' => 'favorite.php',
+	'searchsong' => 'search-song.php',
+	'selectbook' => 'select-book.php',
 	'thumb' => 'thumb.php',
 	'recalc' => 'recalc.php',
 	'mailing' => 'mailing.php',

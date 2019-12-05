@@ -1,7 +1,7 @@
 <?php
 /*
 	vSongBook by AppSmata Solutions
-	http://github.com/appsmata/
+	http://github.com/vsongbook
 
 	Description: Common functions for creating theme-ready structures from data
 
@@ -16,7 +16,7 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
-	More about this license: http://github.com/appsmata/license.php
+	More about this online
 */
 
 if (!defined('AS_VERSION')) { // don't allow this page to be requested directly from browser
@@ -754,7 +754,7 @@ function as_who_to_html($isbyuser, $postuserid, $usershtml, $ip = null, $microda
 		$whohtml = $usershtml[$postuserid];
 	} else {
 		if (strlen($name))
-			$whohtml = as_html(as_db_name_find_by_handle($name));
+			$whohtml = as_html($name);
 		elseif ($isbyuser)
 			$whohtml = as_lang_html('main/me');
 		else
@@ -1463,7 +1463,7 @@ function as_user_sub_navigation($handle, $selected, $ismyuser = false)
 {
 	$navigation = array(
 		'profile' => array(
-			'label' => as_db_name_find_by_handle($handle),
+			'label' => as_lang_html_sub('profile/user_x', as_html($handle)),
 			'url' => as_path_html('user/' . $handle),
 		),
 
