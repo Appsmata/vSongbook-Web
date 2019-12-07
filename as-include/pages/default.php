@@ -66,7 +66,7 @@ foreach ($categories as $book)
 foreach ($songs as $song)
 {
 	$as_content['vsonghome']['songlist'][$song['postid']] = array(
-		$song['number'] . '. '.$song['title'], $song['content']);
+		$song['number'] . '# '.$song['title'], $song['content'], $song['categoryname'].'; '.as_song_verses_chorus_info($song['content']));
 }
 
 return $as_content;

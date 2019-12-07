@@ -2397,3 +2397,18 @@ function as_format_number($number, $decimals = 0, $compact = false)
 		as_lang_html('main/_thousands_separator')
 	) . $suffix;
 }
+
+
+/**
+ * find number of verses in a song and it has a chorus
+ */
+function as_song_verses_chorus_info($lyrics)
+{
+	$songconts = explode("\n\n", $lyrics);
+	$details = "";
+	$verses = count($songconts);
+	if (strpos($lyrics, 'CHORUS') !== false)
+		$details = $details . ($verses - 1) . " Verse" . ($verses == 1 ? "" : "s") . ", Has Chorus";
+	else $details = $details . $verses . " Verse" . ($verses == 1 ? "" : "s") . ", No Chorus";
+	return $details;
+}

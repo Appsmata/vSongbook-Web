@@ -24,23 +24,24 @@ require_once AS_INCLUDE_DIR . 'util/string.php';
 require_once AS_INCLUDE_DIR . 'app/users.php';
 require_once AS_INCLUDE_DIR . 'app/format.php';
 
-$inbook = as_post_text('bookid');
+$songid = as_post_text('selectedsong');
 
 $userid = as_get_logged_in_userid();
-$songlist = as_db_select_with_pending( as_db_posts_select($userid, $inbook) );
+$song = as_db_select_with_pending( as_db_full_post_selectspec($userid, $songid) );
+$songconts = explode("\n\n", $song['content']);
 
 echo "AS_AJAX_RESPONSE\n1\n";
 
 $htmlresult = '';
-foreach ($songlist as $sk => $song)
+$htmlresult .= $song['number'].'# '.$song['title'].'xxx';
+foreach ($songconts as $lyrics)
 {
-    $htmlresult .= '<div class="songlist-item d-flex flex-row w-100 p-2 border-bottom" onclick="as_select_song('.$song['postid'].')">
-        <div class="w-100">
-            <div class="title">'.$song['number'].'. '.$song['title'].'</div>
-            <div class="small last-message">'.$song['content'].'</div>
-            <div class="small"><i>'.$song['categoryname'].'; '.as_song_verses_chorus_info($song['content']).'</i></div>
-        </div>
-    </div>';
+	$htmlresult .= '<div class="p-1 my-1 mx-3 rounded bg-white shadow-sm message-item">';
+	$htmlresult .= '<div class="d-flex flex-row">';
+	$htmlresult .= '<div class="body m-1 mr-2">';
+	$htmlresult .= nl2br( $lyrics );
+	$htmlresult .= '</div></div></div>';
 }
-
+//$this->output('<div class="p-1 my-1 mx-3 rounded bg-white shadow-sm message-item">
+//<div class="d-flex flex-row"><div class="body m-1 mr-2">'..'</div></div></div>');
 echo $htmlresult;

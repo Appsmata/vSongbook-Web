@@ -59,6 +59,26 @@ function as_select_book()
 	});
 }
 
+function as_select_song(songid)
+{
+	var params = {};
+	params.selectedsong = songid;
+	as_ajax_post('selectsong', params, function(lines) {
+		if (lines[0] == '1') {
+			var titleview = document.getElementById('song_title');
+			var contentview = document.getElementById('song_content');
+			var fbstr = lines.slice(1).join('\n').split('xxx');
+			titleview.innerHTML = fbstr[0];
+			contentview.innerHTML = fbstr[1];
+			//as_show_waiting_after(elem, false);
+		} else if (lines[0] == '0') {
+			as_show_waiting_after(elem, false);
+		} else {
+			as_ajax_error();
+		}
+	});
+}
+
 function as_reveal(elem, type, callback)
 {
 	if (elem)

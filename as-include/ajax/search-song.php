@@ -35,10 +35,11 @@ echo "AS_AJAX_RESPONSE\n1\n";
 $htmlresult = '';
 foreach ($songlist as $sk => $song)
 {
-    $htmlresult .= '<div class="songlist-item d-flex flex-row w-100 p-2 border-bottom" onclick="generateMessageArea(this, '.$song['postid'].')">
+    $htmlresult .= '<div class="songlist-item d-flex flex-row w-100 p-2 border-bottom" onclick="as_select_song('.$song['postid'].')">
         <div class="w-100">
             <div class="title">'.$song['number'].'. '.$song['title'].'</div>
             <div class="small last-message">'.$song['content'].'</div>
+            <div class="small"><i>'.$song['categoryname'].'; '.as_song_verses_chorus_info($song['content']).'</i></div>
         </div>
     </div>';
 }

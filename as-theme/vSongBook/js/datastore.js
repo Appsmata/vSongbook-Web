@@ -1,4 +1,11 @@
 
+let user = {
+	id: 0,
+	name: "Anish",
+	number: "+91 91231 40293",
+	pic: "images/asdsd12f34ASd231.png"
+};
+
 let contactList = [
 	{
 		id: 0,

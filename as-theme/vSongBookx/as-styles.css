@@ -9,6 +9,7 @@
 	Theme Update Check URI:
 */
 
+
 ::-webkit-scrollbar {
 	width: 10px;
 }
@@ -25,52 +26,57 @@
 }
 
 #main-container {
-	width: 100vw;
-	height: 100vh;
-}
-
-#navbar {
-	background: #009688;
+	width: 100%;
+	height: 100%;
 }
 
 .dropdown-toggle::after {
 	display: none;
 }
 
-.chat-list-item {
+#songlist {
+	overflow:auto;
+}
+
+.songlist-item {
 	background: white;
 	cursor: pointer;
 }
 
-.chat-list-item:hover {
+.songlist-item:hover {
 	background: hsl(0, 0%, 95%);
 }
 
-.chat-list-item:active {
+.songlist-item:active {
 	background: hsl(0, 0%, 85%);
 }
 
-.chat-list-item.active {
+.songlist-item.active {
 	background: hsl(0, 0%, 90%);
 }
 
-.chat-list-item .chat-details {
+.songlist-item .chat-details {
 	width: 60%;
 }
 
-.chat-list-item.unread .name,
-.chat-list-item.unread .last-message {
+.title {
+	font-size: 20px;
+	font-weight: bold;
+}
+.songlist-item.unread .name,
+.songlist-item.unread .last-message {
 	font-weight: bold;
 }
 
-.chat-list-item .last-message,
+#navbar { background: #FF2500; height: 60px; color: #fff;}
+.songlist-item .last-message,
 #message-area #navbar #details {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-#message-area {
+#preview-area {
 	border-left: 1px solid white;
 }
 
@@ -79,7 +85,12 @@
 }
 
 #input-area {
-	background: hsl(0, 0%, 95%);
+	background: #eee;
+}
+
+#songlist, #song_content{
+	height: 100vh;
+	overflow-y:auto;
 }
 
 #input-area #input {

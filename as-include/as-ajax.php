@@ -60,6 +60,7 @@ $routing = array(
 	'favorite' => 'favorite.php',
 	'searchsong' => 'search-song.php',
 	'selectbook' => 'select-book.php',
+	'selectsong' => 'select-song.php',
 	'thumb' => 'thumb.php',
 	'recalc' => 'recalc.php',
 	'mailing' => 'mailing.php',

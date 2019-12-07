@@ -373,6 +373,7 @@ function as_db_posts_search($userid, $search, $categoryslugs = null)
 	$selectspec['source'] .= ' LEFT JOIN ^categories AS parent ON childcat.parentid=parent.categoryid';
 	
 	$selectspec['source'] .= ' WHERE ^posts.title LIKE "%' . $search . '%"';
+	$selectspec['source'] .= ' OR posts.alias LIKE "%' . $search . '%"';
 	$selectspec['source'] .= ' OR parent.title LIKE "%' . $search . '%"';
 	$selectspec['source'] .= ' OR ^posts.content LIKE "%' . $search . '%"';
 

@@ -3,12 +3,12 @@ let getById = (id, parent) => parent ? parent.getElementById(id) : getById(id, d
 let getByClass = (className, parent) => parent ? parent.getElementsByClassName(className) : getByClass(className, document);
 
 const DOM =  {
-	chatListArea: getById("songlist-area"),
+	chatListArea: getById("chat-list-area"),
 	messageArea: getById("message-area"),
 	inputArea: getById("input-area"),
-	chatList: getById("songlist"),
+	chatList: getById("chat-list"),
 	messages: getById("messages"),
-	chatListItem: getByClass("songlist-item"),
+	chatListItem: getByClass("chat-list-item"),
 	messageAreaName: getById("name", this.messageArea),
 	messageAreaPic: getById("pic", this.messageArea),
 	messageAreaNavbar: getById("navbar", this.messageArea),
@@ -252,7 +252,7 @@ let showProfileSettings = () => {
 
 let hideProfileSettings = () => {
 	DOM.profileSettings.style.left = "-110%";
-	//DOM.username.innerHTML = user.name;
+	DOM.username.innerHTML = user.name;
 };
 
 window.addEventListener("resize", e => {
@@ -260,12 +260,12 @@ window.addEventListener("resize", e => {
 });
 
 let init = () => {
-	//DOM.username.innerHTML = user.name;
-	//DOM.displayPic.src = user.pic;
-	//DOM.profilePic.stc = user.pic;
-	//DOM.profilePic.addEventListener("click", () => DOM.profilePicInput.click());
-	//DOM.profilePicInput.addEventListener("change", () => console.log(DOM.profilePicInput.files[0]));
-	//DOM.inputName.addEventListener("blur", (e) => user.name = e.target.value);
+	DOM.username.innerHTML = user.name;
+	DOM.displayPic.src = user.pic;
+	DOM.profilePic.stc = user.pic;
+	DOM.profilePic.addEventListener("click", () => DOM.profilePicInput.click());
+	DOM.profilePicInput.addEventListener("change", () => console.log(DOM.profilePicInput.files[0]));
+	DOM.inputName.addEventListener("blur", (e) => user.name = e.target.value);
 	generateChatList();
 
 	console.log("Click the Image at top-left to open settings.");
