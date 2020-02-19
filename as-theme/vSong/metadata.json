@@ -1,0 +1,10 @@
+{
+	"name": "vSong",
+	"description": "Fork of Candy",
+	"version": "1.5",
+	"date": "2012-09-11",
+	"author": "vSongBook",
+	"author_uri": "http://appsmata.com",
+	"license": "GPLv2",
+	"min_aps": "1.5"
+}
