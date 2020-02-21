@@ -84,18 +84,24 @@ class as_html_theme extends as_html_theme_base
 		<td><input type="text" name="search" id="input" placeholder="Search for a Song" class="flex-column border-0 px-3 py-2 rounded"
 		style="width: 100%;"></td>
 		</tr>');
-		$this->output('<tr>
-		<td>
-		<select name="search" class="flex-column border-0 px-3 py-2 rounded" style="width: 100%;">
-		<option value="worship">Songs of Worship</option>
-		<option value="injili">Nyimbo za Injili</option>
-		<option value="redemption">Redemption Songs</option>
-		<option value="tenzi">Tenzi za Rohoni</option>
-		</select>
-		</td>
-		</tr>
-		</table>');
+		$this->output('<tr>', '<td>');
+		$this->song_select();
+		$this->output('</td>', '</tr>', '</table>');
 		$this->output('</div>');
+	}
+
+	public function song_select()
+	{
+		$book_list = $this->content['vsonghome']['booklist'];
+
+		$this->output('<select name="search" class="flex-column border-0 px-3 py-2 rounded" style="width: 100%;">');
+
+		foreach ($book_list as $key => $value) 
+		{
+			$this->output('<option value="' . $key . '"' . ($selected ? ' selected' : '') . '>' . $value . '</option>');
+		}
+
+		$this->output('</select>');
 	}
 
 	function song_list()
