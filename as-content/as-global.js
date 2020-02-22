@@ -22,14 +22,14 @@
 function as_search_song()
 {
 	var params = {};
-	params.bookid = document.getElementById('CmbBooks').value;
-	params.searchtext = document.getElementById('TxtSearch').value;
+	params.bookid = document.getElementById('songbook').value;
+	params.searchtext = document.getElementById('txtsearch').value;
 
 	if(params.searchtext.length > 3)
 	{ 
 		as_ajax_post('searchsong', params, function(lines) {
 			if (lines[0] == '1') {
-				var resultsview = document.getElementById('songlist');
+				var resultsview = document.getElementById('song-list');
 				resultsview.innerHTML = lines.slice(1).join('\n');
 				//as_show_waiting_after(elem, false);
 			} else if (lines[0] == '0') {
@@ -45,10 +45,10 @@ function as_search_song()
 function as_select_book()
 {
 	var params = {};
-	params.bookid = document.getElementById('CmbBooks').value;
+	params.bookid = document.getElementById('songbook').value;
 	as_ajax_post('selectbook', params, function(lines) {
 		if (lines[0] == '1') {
-			var resultsview = document.getElementById('songlist');
+			var resultsview = document.getElementById('song-list');
 			resultsview.innerHTML = lines.slice(1).join('\n');
 			//as_show_waiting_after(elem, false);
 		} else if (lines[0] == '0') {
@@ -65,12 +65,18 @@ function as_select_song(songid)
 	params.selectedsong = songid;
 	as_ajax_post('selectsong', params, function(lines) {
 		if (lines[0] == '1') {
-			var titleview = document.getElementById('song_title');
-			var contentview = document.getElementById('song_content');
 			var fbstr = lines.slice(1).join('\n').split('xxx');
-			titleview.innerHTML = fbstr[0];
-			contentview.innerHTML = fbstr[1];
-			//as_show_waiting_after(elem, false);
+			
+			var songtitle = document.getElementById('name');
+			var songbook = document.getElementById('details');
+			var songlyrics = document.getElementById('messages');
+			
+			songtitle.innerHTML = fbstr[0];
+			songbook.innerHTML = fbstr[1];
+			songlyrics.innerHTML = fbstr[2];
+			
+			generateMessageArea();
+
 		} else if (lines[0] == '0') {
 			as_show_waiting_after(elem, false);
 		} else {

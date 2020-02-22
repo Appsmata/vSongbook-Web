@@ -44,29 +44,6 @@ let contactList = [
 	}
 ];
 
-let groupList = [
-	{
-		id: 1,
-		name: "Programmers",
-		members: [0, 1, 3],
-		pic: "images/0923102932_aPRkoW.jpg"
-	},
-	{
-		id: 2,
-		name: "Web Developers",
-		members: [0, 2],
-		pic: "images/1921231232_Ag1asE.png"
-	},
-	{
-		id: 3,
-		name: "notes",
-		members: [0],
-		pic: "images/8230192232_asdEWq2.png"
-	}
-];
-
-// message status - 0:sent, 1:delivered, 2:read
-
 let messages = [
 	{
 		id: 0,

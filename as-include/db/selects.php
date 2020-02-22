@@ -350,6 +350,15 @@ function as_db_posts_select($userid, $bookids)
 	return $selectspec;
 }
 
+function as_db_category_posts($userid, $bookid)
+{
+	$selectspec = as_db_posts_basic_selectspec($userid, true);
+
+	$selectspec['source'] .=
+		" JOIN (SELECT postid FROM ^posts WHERE categoryid=" . $bookid . " AND type='S') y ON ^posts.postid=y.postid";
+
+	return $selectspec;
+}
 
 /**
  * Return the selectspec to retrieve songs (of type $specialtype if provided, or 'S' by default) sorted by $sort,
@@ -373,7 +382,7 @@ function as_db_posts_search($userid, $search, $categoryslugs = null)
 	$selectspec['source'] .= ' LEFT JOIN ^categories AS parent ON childcat.parentid=parent.categoryid';
 	
 	$selectspec['source'] .= ' WHERE ^posts.title LIKE "%' . $search . '%"';
-	$selectspec['source'] .= ' OR posts.alias LIKE "%' . $search . '%"';
+	$selectspec['source'] .= ' OR ^posts.alias LIKE "%' . $search . '%"';
 	$selectspec['source'] .= ' OR parent.title LIKE "%' . $search . '%"';
 	$selectspec['source'] .= ' OR ^posts.content LIKE "%' . $search . '%"';
 

@@ -27,33 +27,33 @@
 	display: none;
 }
 
-.chat-list-item {
+.song-list-item {
 	background: white;
 	cursor: pointer;
 }
 
-.chat-list-item:hover {
+.song-list-item:hover {
 	background: hsl(0, 0%, 95%);
 }
 
-.chat-list-item:active {
+.song-list-item:active {
 	background: hsl(0, 0%, 85%);
 }
 
-.chat-list-item.active {
+.song-list-item.active {
 	background: hsl(0, 0%, 90%);
 }
 
-.chat-list-item .chat-details {
+.song-list-item .chat-details {
 	width: 60%;
 }
 
-.chat-list-item.unread .name,
-.chat-list-item.unread .last-message {
+.song-list-item.unread .name,
+.song-list-item.unread .last-message {
 	font-weight: bold;
 }
 
-.chat-list-item .last-message,
+.song-list-item .last-message,
 #message-area #navbar #details {
 	white-space: nowrap;
 	overflow: hidden;
@@ -76,18 +76,18 @@
 	outline: none;
 }
 
-.message-item {
+.verse-item {
 	position:relative;
 	max-width: 75%;
 	word-break: break-word;
 }
-.message-item.self {
+.verse-item.self {
 	background: #dcf8c6!important;
 }
-.message-item .number {
+.verse-item .number {
 	color: #1f7aec !important;
 }
-.message-item .options {
+.verse-item .options {
 	position: absolute;
 	top: 0;
 	right: -3px;
@@ -96,7 +96,7 @@
 	-moz-transition: all .2s ease-in-out;
 	-webkit-transition: all .2s ease-in-out;
 }
-.message-item:hover .options {
+.verse-item:hover .options {
 	opacity: 1;
 	right: 0;
 }

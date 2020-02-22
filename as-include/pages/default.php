@@ -44,19 +44,15 @@ if ($explicitqa) {
 
 $countslugs = count($slugs);
 
-
 // Get list of songs, other bits of information that might be useful
-
 $userid = as_get_logged_in_userid();
 
 list($categories, $songs) = as_db_select_with_pending(
 	as_db_category_enabled(),
-	as_db_posts_select($userid, 1)
+	as_db_category_posts($userid, 1)	
 );
 
-$as_content['vsonghome'] = array(
-	
-);
+$as_content['vsonghome'] = array();
 
 foreach ($categories as $book)
 {
@@ -65,8 +61,8 @@ foreach ($categories as $book)
 
 foreach ($songs as $song)
 {
-	$as_content['vsonghome']['songlist'][$song['postid']] = array(
-		$song['number'] . '# '.$song['title'], $song['content'], $song['categoryname'].'; '.as_song_verses_chorus_info($song['content']));
+	$as_content['vsonghome']['songlist'][$song['postid']] = $song;
+	//array($song['number'], $song['title'], $song['content'], $song['categoryname'].'; '.as_song_verses_chorus_info($song['content']));
 }
 
 return $as_content;

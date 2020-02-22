@@ -1589,11 +1589,11 @@ class as_html_theme_base
 
 	public function message_item($message)
 	{
-		$this->output('<div class="as-message-item" ' . @$message['tags'] . '>');
+		$this->output('<div class="as-verse-item" ' . @$message['tags'] . '>');
 		$this->message_content($message);
 		$this->post_avatar_meta($message, 'as-message');
 		$this->message_buttons($message);
-		$this->output('</div> <!-- END as-message-item -->', '');
+		$this->output('</div> <!-- END as-verse-item -->', '');
 	}
 
 	public function message_content($message)

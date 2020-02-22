@@ -35,13 +35,15 @@ echo "AS_AJAX_RESPONSE\n1\n";
 $htmlresult = '';
 foreach ($songlist as $sk => $song)
 {
-    $htmlresult .= '<div class="songlist-item d-flex flex-row w-100 p-2 border-bottom" onclick="as_select_song('.$song['postid'].')">
-        <div class="w-100">
-            <div class="title">'.$song['number'].'. '.$song['title'].'</div>
-            <div class="small last-message">'.$song['content'].'</div>
-            <div class="small"><i>'.$song['categoryname'].'; '.as_song_verses_chorus_info($song['content']).'</i></div>
-        </div>
-    </div>';
+    $htmlresult .= '<div class="song-list-item d-flex flex-row w-100 p-2 border-bottom active" onclick="as_select_song('.$song['postid'].')">';
+    $htmlresult .= '<div class="w-100">';
+	
+	$htmlresult .= '<div class="name">' . $song['number'] . '# ' . $song['title']. '</div>';
+	$htmlresult .= '<div class="small last-message">' . $song['content'] . '</div>';
+	$htmlresult .= '<div class="small"><i>'.$song['categoryname'].'; '.as_song_verses_chorus_info($song['content']).'</i></div>';
+
+    $htmlresult .= '</div>';
+    $htmlresult .= '</div>';
 }
 
 echo $htmlresult;

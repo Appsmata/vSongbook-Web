@@ -34,14 +34,17 @@ echo "AS_AJAX_RESPONSE\n1\n";
 
 $htmlresult = '';
 $htmlresult .= $song['number'].'# '.$song['title'].'xxx';
+$htmlresult .= $song['categoryname'].'xxx';
+
 foreach ($songconts as $lyrics)
 {
-	$htmlresult .= '<div class="p-1 my-1 mx-3 rounded bg-white shadow-sm message-item">';
+	$htmlresult .= '<div class="p-1 my-1 mx-3 rounded bg-white shadow-sm verse-item">';
 	$htmlresult .= '<div class="d-flex flex-row">';
 	$htmlresult .= '<div class="body m-1 mr-2">';
 	$htmlresult .= nl2br( $lyrics );
 	$htmlresult .= '</div></div></div>';
 }
-//$this->output('<div class="p-1 my-1 mx-3 rounded bg-white shadow-sm message-item">
+
+//$this->output('<div class="p-1 my-1 mx-3 rounded bg-white shadow-sm verse-item">
 //<div class="d-flex flex-row"><div class="body m-1 mr-2">'..'</div></div></div>');
 echo $htmlresult;
