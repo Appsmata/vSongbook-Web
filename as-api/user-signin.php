@@ -7,6 +7,7 @@
 	require_once '../as-include/app/users.php';
 	
 	$inmobile = as_post_text('mobile');
+	//$inmobile = as_get('mobile');
 	
 	$data = array();
 	if (strlen($inmobile)) {
