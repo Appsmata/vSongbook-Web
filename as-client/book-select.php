@@ -5,14 +5,12 @@
 	require_once '../as-include/app/users.php';
 
 	$userid = as_get_logged_in_userid();
-
 	$categories = as_db_select_with_pending(as_db_category_enabled());
 	
-	$total = count($categories);
-	$data = array();
+	$result = array();
 
 	foreach( $categories as $category ){
-		array_push($data, array(
+		array_push($result, array(
 			'categoryid' 	=> $category['categoryid'],
 			'title' 		=> $category['title'],
 			'tags' 			=> $category['tags'],
@@ -22,6 +20,7 @@
 		);	
 	}
 	
-	$output = json_encode(array('total' => $total, 'data' => $data));
-	
-	echo $output;
+	$response["result"] = "success";
+	$response["message"] = "Request successful";
+	$response["list"] = $result;
+	echo json_encode($result);

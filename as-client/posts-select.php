@@ -48,6 +48,6 @@
 		}
 	}
 
-	$output = json_encode(array('total' => $total, 'data' => $data));
+	$output = json_encode($data);
 	
 	echo strip_tags($output);
