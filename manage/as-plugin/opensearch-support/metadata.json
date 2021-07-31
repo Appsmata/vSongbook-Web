@@ -1,0 +1,11 @@
+{
+	"name": "OpenSearch Support",
+	"description": "Allows OpenSearch clients to search APS site directly",
+	"version": "1.0",
+	"date": "2012-08-21",
+	"author": "vSongBook",
+	"author_uri": "http://www.song2review.org",
+	"license": "GPLv2",
+	"min_aps": "1.5",
+	"load_order": "after_db_init"
+}

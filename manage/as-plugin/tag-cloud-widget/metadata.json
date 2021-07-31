@@ -1,0 +1,11 @@
+{
+	"name": "Tag Cloud Widget",
+	"description": "Provides a list of tags with size indicating popularity",
+	"version": "1.0.1",
+	"date": "2011-12-06",
+	"author": "vSongBook",
+	"author_uri": "http://www.song2review.org",
+	"license": "GPLv2",
+	"min_aps": "1.4",
+	"load_order": "after_db_init"
+}

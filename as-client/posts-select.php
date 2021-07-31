@@ -36,6 +36,7 @@
 				'postid' 			=> $songid,
 				'number' 			=> $song['number'],
 				'title' 			=> $song['title'],
+				'alias' 			=> $song['alias'] == null ? "" : $song['alias'],
 				'content' 			=> $song['content'],
 				'tags' 				=> array_key_exists('tags', $song) ? $song['tags'] : null,
 				'created' 			=> $song['created'],

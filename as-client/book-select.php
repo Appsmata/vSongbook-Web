@@ -19,8 +19,9 @@
 			'backpath' 		=> $category['backpath'])
 		);	
 	}
-	
-	$response["result"] = "success";
+
+	$response["status"] = "1";
 	$response["message"] = "Request successful";
-	$response["list"] = $result;
-	echo json_encode($result);
+	$response["results"] = $result;
+
+	echo json_encode($response);
