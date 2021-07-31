@@ -20,7 +20,7 @@
 		);	
 	}
 
-	$response["status"] = "1";
+	$response["status"] = 1;
 	$response["message"] = "Request successful";
 	$response["results"] = $result;
 

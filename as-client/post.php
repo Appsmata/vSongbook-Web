@@ -25,52 +25,52 @@
 	$followanswer = null;
 	$innotify = null;
 		
-	$data = array();
+	$response = array();
 	$permiterror = as_user_maximum_permit_error('permit_post_q', AS_LIMIT_QUESTIONS);
 	
 	if ($permiterror) {
-		$data['success'] = 0;
+		$response['success'] = 0;
 		switch ($permiterror) {
 			case 'signin':
-				$data['message'] = as_lang_html('question/write_must_signin');
+				$response['message'] = as_lang_html('question/write_must_signin');
 				break;
 
 			case 'confirm':
-				$data['message'] = as_lang_html('question/write_must_confirm');
+				$response['message'] = as_lang_html('question/write_must_confirm');
 				break;
 
 			case 'limit':
-				$data['message'] = as_lang_html('question/write_limit');
+				$response['message'] = as_lang_html('question/write_limit');
 				break;
 
 			case 'approve':
-				$data['message'] = as_lang_html('question/write_must_be_approved');
+				$response['message'] = as_lang_html('question/write_must_be_approved');
 				break;
 
 			default:
-				$data['message'] =  as_lang_html('users/no_permission');
+				$response['message'] =  as_lang_html('users/no_permission');
 				break;
 		}
 	}
 
 	if (empty($intitle)) {
-		$data['success'] = 3;
-		$data['message'] = 'The title of the question appears to be invalid';
+		$response['success'] = 3;
+		$response['message'] = 'The title of the question appears to be invalid';
 	}
 	
 	else if (empty($incategoryid)) {
-		$data['success'] = 3;
-		$data['message'] = 'The category of the question appears to be invalid';
+		$response['success'] = 3;
+		$response['message'] = 'The category of the question appears to be invalid';
 	}
 	
 	else if (empty($incontent)) {
-		$data['success'] = 3;
-		$data['message'] = 'The content of the question appears to be invalid';
+		$response['success'] = 3;
+		$response['message'] = 'The content of the question appears to be invalid';
 	}
 	
 	else if (empty($intags)) {
-		$data['success'] = 3;
-		$data['message'] = 'The tags of the question appears to be invalid';
+		$response['success'] = 3;
+		$response['message'] = 'The tags of the question appears to be invalid';
 	}
 	
 	else {
@@ -84,10 +84,9 @@
 			
 			$questionid = as_question_create($followanswer, $inuserid, $inhandle, $cookieid, $intitle, $incontent, $format, $text, isset($intags) ? as_tags_to_tagstring($intags) : '', $innotify, $inemail, $incategoryid, null, null, null);
 			
-			$data['success'] = 1;
-			$data['message'] = 'Asked in successfully';
+			$response['success'] = 1;
+			$response['message'] = 'Asked in successfully';
 		}
 	} 
 	
-	$output = json_encode(array('data' => $data));	
-	echo $output;
+	echo json_encode($response);

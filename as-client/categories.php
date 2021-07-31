@@ -12,10 +12,10 @@
 	$categories = as_db_select_with_pending(as_db_category_nav_selectspec($categoryslugs, false, false, true));
 	
 	$total = count($categories);
-	$data = array();
+	$response = array();
 
 	foreach( $categories as $category ){
-		array_push($data, array(
+		array_push($result, array(
 			'categoryid' 	=> $category['categoryid'],
 			'enabled' 		=> $category['enabled'],
 			'title' 		=> $category['title'],
@@ -26,6 +26,8 @@
 		);	
 	}
 	
-	$output = json_encode(array('total' => $total, 'data' => $data));
-	
-	echo $output;
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

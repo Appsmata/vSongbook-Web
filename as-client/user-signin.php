@@ -8,10 +8,10 @@
 	
 	if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
-		$data = json_decode(file_get_contents("php://input"));
-		if(isset($data -> user ) && !empty($data -> user) && isset($data -> user -> mobile)){
+		$response = json_decode(file_get_contents("php://input"));
+		if(isset($response -> user ) && !empty($response -> user) && isset($response -> user -> mobile)){
 
-			$user = $data -> user;
+			$user = $response -> user;
 			$mobile = $user -> mobile;
 
 			$matchusers = as_db_user_find_by_mobile($mobile);
@@ -54,3 +54,9 @@
 			echo json_encode($response);
 		}
 	}
+
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

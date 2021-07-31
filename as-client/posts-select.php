@@ -11,7 +11,7 @@
 	$cookieid = as_cookie_get();
 	
 	$total = 0;
-	$data = array();
+	$response = array();
 	
 	if (strlen($books)) {
 		$songs = as_db_select_with_pending( as_db_posts_select($userid, $books) );
@@ -32,7 +32,7 @@
 				$who = @array_key_exists('data', $as_content['who']) ? ' '.@$as_content['who']['data'] : null;
 			} else $who = '';
 			
-			array_push($data, array(
+			array_push($result, array(
 				'postid' 			=> $songid,
 				'number' 			=> $song['number'],
 				'title' 			=> $song['title'],
@@ -49,6 +49,8 @@
 		}
 	}
 
-	$output = json_encode($data);
-	
-	echo strip_tags($output);
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

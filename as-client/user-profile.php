@@ -32,9 +32,9 @@
 			}
 		}
 		
-		$data = array();
+		$response = array();
 		
-		array_push($data, array(
+		array_push($result, array(
 			'userid' 				=> $useraccount['userid'],
 			'passsalt' 				=> $useraccount['passsalt'],
 			'passcheck' 			=> $useraccount['passcheck'],
@@ -59,10 +59,13 @@
 			)
 		);	
 		
-		$output = json_encode(array('data' => $data));
+		$output = json_encode(array('data' => $response));
 	} else {
 		die('handle is required.');
 	}
 	
-	
-	echo $output;
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

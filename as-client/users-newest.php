@@ -14,10 +14,10 @@
 	$usersHtml = as_userids_handles_html($users);
 
 	$total = count($users);
-	$data = array();
+	$response = array();
 	
 	foreach( $users as $user ){
-		array_push($data, array(
+		array_push($result, array(
 			'userid' 		=> $user['userid'],
 			'handle' 		=> $user['handle'],
 			'flags' 		=> $user['flags'],
@@ -29,6 +29,8 @@
 		);	
 	}
 	
-	$output = json_encode(array('total' => $total, 'data' => $data));
-	
-	echo $output;
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

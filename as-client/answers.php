@@ -15,9 +15,9 @@
 	);
 	
 	$total = count($songs);
-	$data = array();
+	$response = array();
 	foreach( $songs as $song ){
-		array_push($data, array(
+		array_push($result, array(
 			'postid' 			=> $song['postid'],
 			'categoryid' 		=> $song['categoryid'],
 			'type' 				=> $song['type'],
@@ -29,7 +29,7 @@
 			'closedbyid' 		=> $song['closedbyid'],
 			'thumbsup' 			=> $song['thumbsup'],
 			'thumbsdown' 		=> $song['thumbsdown'],
-			'netthumbs' 			=> $song['netthumbs'],
+			'netthumbs' 		=> $song['netthumbs'],
 			'views' 			=> $song['views'],
 			'hotness' 			=> $song['hotness'],
 			'flagcount' 		=> $song['flagcount'],
@@ -40,7 +40,7 @@
 			'categoryname' 		=> $song['categoryname'],
 			'categorybackpath' 	=> $song['categorybackpath'],
 			'categoryids' 		=> $song['categoryids'],
-			'userthumb' 			=> $song['userthumb'],
+			'userthumb' 		=> $song['userthumb'],
 			'userflag' 			=> $song['userflag'],
 			'userfavoriteq' 	=> $song['userfavoriteq'],
 			'userid' 			=> $song['userid'],
@@ -57,6 +57,9 @@
 			'itemorder' 		=> $song['_order_'])
 		);	
 	}
-	$output = json_encode(array('total' => $total, 'data' => $data));
 	
-	echo $output;
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

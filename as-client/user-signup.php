@@ -9,10 +9,10 @@
 	
 	if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
-		$data = json_decode(file_get_contents("php://input"));
-		if(isset($data -> user ) && !empty($data -> user) && isset($data -> user -> firstname) && isset($data -> user -> lastname) && isset($data -> user -> country) && isset($data -> user -> mobile) && isset($data -> user -> gender) && isset($data -> user -> city) && isset($data -> user -> church)) {
+		$response = json_decode(file_get_contents("php://input"));
+		if(isset($response -> user ) && !empty($response -> user) && isset($response -> user -> firstname) && isset($response -> user -> lastname) && isset($response -> user -> country) && isset($response -> user -> mobile) && isset($response -> user -> gender) && isset($response -> user -> city) && isset($response -> user -> church)) {
 
-			$user = $data -> user;
+			$user = $response -> user;
 			$infirstname = $user -> firstname;
 			$inlastname = $user -> lastname;
 			$incountry = $user -> country;
@@ -70,3 +70,9 @@
 			echo json_encode($response);
 		}
 	}
+
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

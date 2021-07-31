@@ -37,7 +37,7 @@
 	
 	$total = count($songs);
 	
-	$data = array();
+	$response = array();
 	$usershtml = as_userids_handles_html($songs, true);
 	foreach( $songs as $song ){
 		$songid = $song['postid'];
@@ -65,7 +65,7 @@
 			$as_content['who']['points']['suffix'].')' : null;
 		} else $who = '';
 		
-		array_push($data, array(
+		array_push($result, array(
 			'postid' 			=> $songid,
 			'basetype' 			=> $song['basetype'],
 			'title' 			=> $song['title'],
@@ -87,6 +87,9 @@
 			'thumb_state' 		=> $as_content['thumb_state'])
 		);
 	}
-	$output = json_encode(array('total' => $total, 'data' => $data));
 	
-	echo $output;
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

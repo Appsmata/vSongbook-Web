@@ -16,7 +16,7 @@
 	
 	$success = 0;
 	$message = '';
-	$data = array();
+	$response = array();
 	
 	$cacheDriver = APS_Storage_CacheFactory::getCacheDriver();
 	$cacheKey = "song:$songid";
@@ -81,7 +81,7 @@
 			$who = @$as_content['who']['prefix'].' <b>'.@$as_content['who']['data'].'</b> ('. @$as_content['who']['points']['data'].' '. 
 				$as_content['who']['points']['suffix'].')';
 				
-			array_push($data, array(
+			array_push($result, array(
 				'postid' 		=> $reviewid,
 				'basetype' 		=> $review['basetype'],
 				'created' 		=> $review['created'],
@@ -102,6 +102,8 @@
 		$message = 'the song was either deleted or hidden.';
 	}
 	
-	$output = json_encode(array('success' => $success, 'message' => $message, 'data' => $data));	
-	
-	echo $output;
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

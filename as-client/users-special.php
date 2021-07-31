@@ -8,10 +8,10 @@
 	$users = as_db_select_with_pending(as_db_users_from_level_selectspec(AS_USER_LEVEL_EXPERT));
 
 	$total = count($users);
-	$data = array();
+	$response = array();
 
 	foreach( $users as $user ){
-		array_push($data, array(
+		array_push($result, array(
 			'userid' 		=> $user['userid'],
 			'handle' 		=> $user['handle'],
 			'level' 		=> $user['level'],
@@ -20,6 +20,8 @@
 		);	
 	}
 	
-	$output = json_encode(array('total' => $total, 'data' => $data));
-	
-	echo $output;
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

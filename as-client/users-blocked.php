@@ -24,13 +24,13 @@
 	$userid = as_get_logged_in_userid();
 	
 	$total = count($users);
-	$data = array();
+	$response = array();
 	
 	if (AS_FINAL_EXTERNAL_USERS) {
 		die('User accounts are handled by external code');
 	} else {
 		foreach( $users as $user ){
-			array_push($data, array(
+			array_push($result, array(
 				'userid' 		=> $user['userid'],
 				'handle' 		=> $user['handle'],
 				'points' 		=> $user['points'],
@@ -43,7 +43,11 @@
 				)
 			);	
 		}
-		$output = json_encode(array('total' => $total, 'data' => $data));
+		$output = json_encode(array('total' => $total, 'data' => $response));
 	}
 	
-	echo $output;
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

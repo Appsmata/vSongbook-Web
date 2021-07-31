@@ -16,7 +16,7 @@
 	
 	$success = 0;
 	$message = '';
-	$data = array();
+	$response = array();
 	
 	$cacheDriver = APS_Storage_CacheFactory::getCacheDriver();
 	$cacheKey = "song:$songid";
@@ -70,23 +70,6 @@
 		
 		$usershtml = as_userids_handles_html(array_merge(array($song), $reviews, $commentsfollows), true);
 
-		/*$as_content = as_content_prepare(true, array_keys(as_category_path($categories, $song['categoryid'])));
-
-		if (isset($userid) && !$formrequested)
-			$as_content['favorite'] = as_favorite_form(AS_ENTITY_SONG, $songid, $favorite,
-				as_lang($favorite ? 'song/remove_q_favorites' : 'song/add_q_favorites'));
-
-		if (isset($pageerror))
-			$as_content['error'] = $pageerror; // might also show thumbing error set in as-index.php
-
-		elseif ($song['queued'])
-			$as_content['error'] = $song['isbyuser'] ? as_lang_html('song/q_your_waiting_approval') : as_lang_html('song/q_waiting_your_approval');
-
-		if ($song['hidden'])
-			$as_content['hidden'] = true;
-
-		as_sort_by($commentsfollows, 'created');*/
-
 		$as_content = as_page_q_song_view($song, $parentsong, $closepost, $usershtml, null);
 				
 		$when = '<b>'.@$as_content['when']['data'].' '.@$as_content['when']['suffix'].'</b>';
@@ -94,27 +77,27 @@
 		$who = @$as_content['who']['prefix'].' <b>'.@$as_content['who']['data'].'</b> ('. @$as_content['who']['points']['data'].' '. 
 			$as_content['who']['points']['suffix'].')';
 			
-		$data['postid'] 		= $songid;
-		$data['basetype'] 		= $song['basetype'];
-		$data['title'] 			= $song['title'];
-		$data['content'] 		= $song['content'];
-		$data['tags']			= $song['tags'];
-		$data['created'] 		= $song['created'];
-		$data['categoryid'] 	= $song['categoryid'];
-		$data['category'] 		= $song['categoryname'];
-		$data['meta_order'] 	= $as_content['meta_order'];
-		$data['what'] 			= $as_content['what'];
-		$data['when'] 			= trim($when);
-		$data['where'] 			= trim($where);
-		$data['who'] 			= trim($who);
-		$data['netthumbs'] 		= $song['netthumbs'];
-		$data['views'] 			= $song['views'];
-		$data['hotness'] 		= $song['hotness'];
-		$data['acount'] 		= $song['acount'];
-		$data['userid'] 		= $song['userid'];
-		$data['level'] 			= $song['level'];
-		$data['avatar'] 		= $as_content['avatar'];
-		$data['thumb_state'] 	= $as_content['thumb_state'];
+		$response['postid'] 		= $songid;
+		$response['basetype'] 		= $song['basetype'];
+		$response['title'] 			= $song['title'];
+		$response['content'] 		= $song['content'];
+		$response['tags']			= $song['tags'];
+		$response['created'] 		= $song['created'];
+		$response['categoryid'] 	= $song['categoryid'];
+		$response['category'] 		= $song['categoryname'];
+		$response['meta_order'] 	= $as_content['meta_order'];
+		$response['what'] 			= $as_content['what'];
+		$response['when'] 			= trim($when);
+		$response['where'] 			= trim($where);
+		$response['who'] 			= trim($who);
+		$response['netthumbs'] 		= $song['netthumbs'];
+		$response['views'] 			= $song['views'];
+		$response['hotness'] 		= $song['hotness'];
+		$response['acount'] 		= $song['acount'];
+		$response['userid'] 		= $song['userid'];
+		$response['level'] 			= $song['level'];
+		$response['avatar'] 		= $as_content['avatar'];
+		$response['thumb_state'] 	= $as_content['thumb_state'];
 		
 		$success = 1;
 	} else {
@@ -122,6 +105,10 @@
 		$message = 'the song was either deleted or hidden.';
 	}
 	
-	$output = json_encode(array('success' => $success, 'message' => $message, 'data' => $data));	
+	$output = json_encode(array('success' => $success, 'message' => $message, 'data' => $response));	
 	
-	echo $output;
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+	$response["results"] = $result;
+
+	echo json_encode($response);

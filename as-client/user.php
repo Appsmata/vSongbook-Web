@@ -1,7 +1,8 @@
 <?php
 	require_once '../as-include/as-base.php';
 	require_once '../as-include/db/users.php';
-	require_once '../as-include/db/selects.php';
+	require_once '../as-include/db/selects.php';
+
 	require_once '../as-include/app/format.php';
 	require_once '../as-include/app/users.php';
 
@@ -15,3 +16,7 @@
 	}*/
 	$userid = as_handle_to_userid($handle);
 	//echo $output;
+	$response["status"] = 1;
+	$response["message"] = "Request successful";
+
+	echo json_encode($response);
